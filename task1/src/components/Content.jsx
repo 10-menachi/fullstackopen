@@ -1,10 +1,10 @@
 import React from 'react'
 import Part from './Part'
 
-function Content({parts, exercises}) {
+function Content({parts}) {
   return (
     <div>
-        {parts.map((part, i) => <Part key={i} part={part} exercise={exercises[i]} />)}
+        {parts.parts.map(part => <Part key={part.exercises} part={part} />)}
     </div>
   )
 }
