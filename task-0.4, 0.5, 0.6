@@ -1,0 +1,55 @@
+Task 0.4
+
+title task 0
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+note over server:
+The server responds with a status code, status message and the data,
+if there was no error while sending the data to the browser. The
+browser refreshes and fetches data again from the server.
+end note
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server-->browser: HTML-code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->browser: main.js
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
+note over browser:
+browser executes the event handler
+that renders notes to display
+end note
+
+Task 0.5
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server-->browser: HTML-code
+note over browser:
+The javascript file executes in the browser
+to communictate with the server and fetch
+contents of the HTML page
+end note
+
+
+
+Task 0.6
+
+title task 1
+
+title task 0
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server-->browser: HTML-code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->browser: main.js
+note over server:
+The server responds with a status code, status message and the data,
+if there was no error while sending the data to the browser. The
+browser does not refresh this time. It just adds a new note to the notes
+list on the browser then sends the note to the browser
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
