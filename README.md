@@ -1,1 +1,2 @@
-## This is a react app to show the overview about the Fullstack Open course
+## This is a repository containing assignments for the
+## fullstackopen react course
