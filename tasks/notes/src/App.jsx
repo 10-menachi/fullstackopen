@@ -5,6 +5,11 @@ function App({ notes }) {
 
   const [notes_array, set_notes_array] = useState(notes)
   const [new_note, set_new_note] = useState('')
+  const [show_all, set_show_all] = useState(false)
+
+  const notes_to_show = show_all 
+        ? notes 
+        : notes.filter(note => note.important)
 
   const add_new_note = (event) => {
     event.preventDefault()
@@ -16,14 +21,17 @@ function App({ notes }) {
     }
     set_notes_array(notes_array.concat(new_note_object))
     set_new_note('')
-    console.log(notes_array);
   }
 
   return (
     <div>
       <h1>Notes</h1>
+
+      <button onClick={() => set_show_all(!show_all)}>
+        show {show_all? 'Important' : 'All'}
+      </button>
       <ul>
-        {notes_array.map((note, index) => <Note key={index} note={note.content} />)}
+        {notes_to_show.map((note, index) => <Note key={index} note={note.content} />)}
       </ul>
 
       <form onSubmit={add_new_note}>
