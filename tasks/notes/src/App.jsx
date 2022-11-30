@@ -1,15 +1,22 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Note from "./components/Note"
+import axios from 'axios'
 
-function App({ notes }) {
+function App() {
 
-  const [notes_array, set_notes_array] = useState(notes)
+  const [notes_array, set_notes_array] = useState([])
   const [new_note, set_new_note] = useState('')
   const [show_all, set_show_all] = useState(false)
 
+  useEffect(() => {
+    axios.get('http://localhost:3001/notes').then(response => {
+      set_notes_array(response.data)
+    })
+  }, [])
+
   const notes_to_show = show_all 
-        ? notes 
-        : notes.filter(note => note.important)
+        ? notes_array 
+        : notes_array.filter(note => note.important)
 
   const add_new_note = (event) => {
     event.preventDefault()
@@ -17,7 +24,7 @@ function App({ notes }) {
       content: new_note,
       date: new Date().toISOString(),
       important: Math.random() < 0.5,
-      id: notes.length + 1,
+      id: notes_array.length + 1,
     }
     set_notes_array(notes_array.concat(new_note_object))
     set_new_note('')
