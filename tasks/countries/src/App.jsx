@@ -1,32 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useEffect, useState } from "react"
+import axios from 'axios'
+import Search from "./components/Search"
+import Countries from "./components/Countries"
+const App = () => {
 
-function App() {
-  const [count, setCount] = useState(0)
+  const [countries, setCountries] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
+  const [weatherData, setWeatherData] = useState([])
 
+  const fetch_countries = () => {
+    axios.get('https://restcountries.com/v3.1/all')
+    .then(response => {
+      setCountries(response.data)
+    })
+  }
+
+  useEffect(fetch_countries, [])
+  
+
+  const filtered_countries = countries.filter(country => country.name.common.toLowerCase().includes(searchTerm.toLowerCase()))
+
+  
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+
+      <Countries  countries={filtered_countries} weather={weatherData} />
+
+
     </div>
   )
 }
