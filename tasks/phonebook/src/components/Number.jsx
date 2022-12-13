@@ -1,9 +1,10 @@
 import React from 'react'
 
-function Number({name, number}) {
+function Number({person, delete_contact}) {
   return (
     <div>
-        <p>{name} {number}</p>
+        <p>{person.name} {person.number}</p>
+        <button onClick={() => delete_contact(person.id)}>Delete Contact</button>
     </div>
   )
 }

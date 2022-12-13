@@ -1,8 +1,14 @@
 import React from 'react'
 
-function Note({ note }) {
+function Note({ note, toggleImportance }) {
+  const label = note.important
+    ? 'Make Not Important'
+    : 'Make Important'
   return (
-    <li>{note}</li>
+    <div>
+      {note.content}
+      <button onClick={() => toggleImportance(note.id)}>{label}</button>
+    </div>
   )
 }
 
